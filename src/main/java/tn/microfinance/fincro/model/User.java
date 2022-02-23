@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -14,10 +15,23 @@ import javax.persistence.Id;
 
 @AllArgsConstructor
 @Entity
-
-public class User {
+@Table
+public class User implements Serializable {
     @Id
-    private int idUser;
-
-
+    private Integer idUser;
+    private Integer cin;
+    private String lastName;
+    private String name;
+    @Temporal(TemporalType.DATE)
+    private Date birthDate;
+    private Integer phoneNumber;
+    private String email;
+    private String password;
+    private String adress;
+    private String profession;
+    private Float salary;
+    @Temporal(TemporalType.DATE)
+    private Date accountCreationDate;
+    @Enumerated(EnumType.STRING)
+    private Role Role;
 }
