@@ -14,9 +14,10 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table
+@Table(name="user")
 public class User implements Serializable {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idUser;
     private Integer cin;
     private String lastName;
