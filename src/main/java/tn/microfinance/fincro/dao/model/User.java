@@ -1,4 +1,4 @@
-package tn.microfinance.fincro.model;
+package tn.microfinance.fincro.dao.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
