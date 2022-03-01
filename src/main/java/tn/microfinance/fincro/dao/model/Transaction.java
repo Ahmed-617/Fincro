@@ -1,4 +1,4 @@
-package tn.microfinance.fincro.model;
+package tn.microfinance.fincro.dao.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,18 +10,18 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table( name = "ACCOUNT")
+@Table( name = "TRANSACTION")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Account implements Serializable {
+public class Transaction implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idAccount;
-    private float balance;
-    private String password;
+    private int idTransaction;
+    private int amount;
     @Temporal(TemporalType.DATE)
-    private Date accountCreationDate;
-
+    private Date transactionDate;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
 }
