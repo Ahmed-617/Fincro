@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Table (name = "CLAIM")
 @Entity
 @Getter
@@ -29,6 +30,8 @@ public class Claim {
 
     @Temporal(TemporalType.DATE)
     private Date ClaimDate;
+
+
 
 
 }
