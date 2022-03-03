@@ -1,4 +1,10 @@
 package tn.microfinance.fincro.dao.repositories;
 
-public interface ContractRepository {
+
+import org.springframework.data.repository.CrudRepository;
+import tn.microfinance.fincro.dao.model.Contract;
+
+public interface ContractRepository extends CrudRepository<Contract,Integer > {
+
+
 }
