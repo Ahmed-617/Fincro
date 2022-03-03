@@ -1,33 +1,60 @@
 package tn.microfinance.fincro.services.implementations;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.MicroCredit;
+import tn.microfinance.fincro.dao.repositories.MicroCreditRepository;
 import tn.microfinance.fincro.services.interfaces.MicroCreditService;
 
 import java.util.List;
 
+@Service
 public class MicroCreditServiceImpl implements MicroCreditService {
+    @Autowired
+    MicroCreditRepository creditRepo;
+
     @Override
     public List<MicroCredit> retrieveAllCredits() {
-        return null;
+       return (List<MicroCredit>) creditRepo.findAll();
     }
 
     @Override
     public MicroCredit addCredit(MicroCredit c) {
-        return null;
+        System.out.println("Credit added");
+        return creditRepo.save(c);
+
+    }
+
+    @Override
+    public void archiveCredit(Long id) {
+
     }
 
     @Override
     public void deleteCredit(Long id) {
-
+        MicroCredit credit= creditRepo.findById(id).get();
+        if (creditRepo.findById(id).isPresent()) {
+            creditRepo.delete(credit);
+            System.out.println("Credit deleted");
+        } else {
+            System.out.println("Credit not found");
+        }
     }
 
     @Override
     public MicroCredit updateCredit(MicroCredit c) {
-        return null;
+        Long t = c.getIdCredit();
+        if (creditRepo.findById(t).isPresent()) {
+            return creditRepo.save(c);
+        } else {
+            System.out.println("credit doesn't exist !");
+            return null;
+        }
     }
 
     @Override
     public MicroCredit retrieveCredit(Long id) {
-        return null;
+
+        return creditRepo.findById(id).get();
     }
 }
