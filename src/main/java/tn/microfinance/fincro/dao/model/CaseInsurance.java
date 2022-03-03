@@ -17,7 +17,7 @@ import javax.persistence.*;
 public class CaseInsurance {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer idCase;
+    private long idCase;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
@@ -26,9 +26,6 @@ public class CaseInsurance {
     @Column(nullable = false)
     private Integer Benefits;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CaseInsuranceBenefitsType benefitsType;
 
     @Column(nullable = false)
     private Integer BenefitRemaining;
