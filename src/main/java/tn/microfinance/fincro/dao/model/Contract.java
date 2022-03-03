@@ -53,10 +53,8 @@ public class Contract implements Serializable{
     private boolean visibility;
 
 
-    private String TitreDePropriete ;
-
-   // @ManyToOne(cascade = CascadeType.ALL)
-    //private Client fkClient;
+   @ManyToOne(cascade = CascadeType.ALL)
+    private User fkClient;
 
 
 }
