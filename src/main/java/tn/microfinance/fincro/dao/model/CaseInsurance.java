@@ -33,6 +33,11 @@ public class CaseInsurance {
     @OneToOne(mappedBy = "CaseInsurance")
     private Claim claim;
 
+    @OneToOne(mappedBy = "CaseInsurance")
+    private Claim claim;
+
+    @OneToOne(mappedBy = "CaseInsurance")
+    private Contract contract;
 
 
 
