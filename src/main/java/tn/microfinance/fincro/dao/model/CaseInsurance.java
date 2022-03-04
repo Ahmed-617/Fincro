@@ -30,6 +30,10 @@ public class CaseInsurance {
     @Column(nullable = false)
     private Integer BenefitRemaining;
 
+    @OneToOne(mappedBy = "CaseInsurance")
+    private Claim claim;
+
+
 
 
 

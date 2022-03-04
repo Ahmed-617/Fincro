@@ -33,5 +33,6 @@ public class Claim {
 
 
 
-
+@OneToOne
+    private CaseInsurance caseInsurance;
 }
