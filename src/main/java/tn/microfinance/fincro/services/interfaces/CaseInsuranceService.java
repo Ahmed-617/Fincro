@@ -1,8 +1,10 @@
 package tn.microfinance.fincro.services.interfaces;
 
+import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.CaseInsurance;
 
 import java.util.List;
+
 
 public interface CaseInsuranceService {
 

@@ -31,6 +31,9 @@ public class Claim {
     @Temporal(TemporalType.DATE)
     private Date ClaimDate;
 
+    @OneToOne
+    private CaseInsurance caseInsurance;
+
 
 
 @OneToOne
