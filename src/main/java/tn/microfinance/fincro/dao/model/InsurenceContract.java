@@ -16,7 +16,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Entity(name ="CONTRACT")
 @Table(name ="CONTRACT")
-public class Contract implements Serializable{
+public class InsurenceContract implements Serializable{
 
     private static final long serialVersionUID = 1L;
 
