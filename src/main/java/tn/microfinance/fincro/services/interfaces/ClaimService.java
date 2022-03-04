@@ -1,10 +1,11 @@
 package tn.microfinance.fincro.services.interfaces;
 
+import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.Claim;
 import tn.microfinance.fincro.dao.model.MicroCredit;
 
 import java.util.List;
-
+@Service
 public interface ClaimService {
 
 
