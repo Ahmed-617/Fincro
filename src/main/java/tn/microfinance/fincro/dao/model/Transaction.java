@@ -24,4 +24,6 @@ public class Transaction implements Serializable {
     private Date transactionDate;
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
+    @ManyToOne
+    private Account account;
 }

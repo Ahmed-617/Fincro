@@ -5,10 +5,11 @@ import tn.microfinance.fincro.dao.model.MicroCredit;
 import java.util.List;
 
 public interface MicroCreditService {
-
     List<MicroCredit> retrieveAllCredits();
 
     MicroCredit addCredit(MicroCredit c);
+
+    void archiveCredit(Long id);
 
     void deleteCredit(Long id);
 

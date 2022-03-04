@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table( name = "ACCOUNT")
@@ -23,5 +24,9 @@ public class Account implements Serializable {
     private String password;
     @Temporal(TemporalType.DATE)
     private Date accountCreationDate;
+    @ManyToOne
+    private User user;
+    @OneToMany(mappedBy = "account")
+    private List<Transaction> transactions;
 
 }
