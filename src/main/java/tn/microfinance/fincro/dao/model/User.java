@@ -38,5 +38,5 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user")
     private List<Account>account;
     @OneToMany(mappedBy = "user")
-    private List<Contract>contract;
+    private List<InsurenceContract> insurenceContract;
 }
