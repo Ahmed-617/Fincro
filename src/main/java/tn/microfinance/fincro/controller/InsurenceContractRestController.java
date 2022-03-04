@@ -16,8 +16,8 @@ public class InsurenceContractRestController {
         @Autowired
         IInsurenceContractService contractService;
 
-        @PostMapping("addCredit")
-        public InsurenceContract addCre (@RequestBody InsurenceContract insurenceContract){
+        @PostMapping("addContract")
+        public InsurenceContract addContract (@RequestBody InsurenceContract insurenceContract){
             return contractService.addContract(insurenceContract);
         }
 
