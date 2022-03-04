@@ -28,5 +28,8 @@ public class Account implements Serializable {
     private User user;
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;
+    @OneToMany(mappedBy = "accountFK")
+    private List<MicroCredit> microCredits;
+
 
 }
