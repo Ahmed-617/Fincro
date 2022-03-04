@@ -52,6 +52,7 @@ public class MicroCredit {
 
     private String guarantorFile;
 
+
     @ManyToOne(cascade = CascadeType.ALL)
     private  Account accountFK;
 }
