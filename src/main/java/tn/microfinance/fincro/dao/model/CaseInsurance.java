@@ -30,18 +30,11 @@ public class CaseInsurance {
     @Column(nullable = false)
     private Integer BenefitRemaining;
 
-    @OneToOne(mappedBy = "CaseInsurance")
+    @OneToOne(mappedBy = "caseInsur")
     private Claim claim;
 
-    @OneToOne(mappedBy = "CaseInsurance")
-    private Claim claim;
-
-    @OneToOne(mappedBy = "CaseInsurance")
-    private Contract contract;
-
-
-
-
+    @OneToOne(mappedBy = "caseInsurance")
+    private InsurenceContract contract;
 
 
 
