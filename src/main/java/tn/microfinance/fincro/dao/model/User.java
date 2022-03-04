@@ -37,6 +37,6 @@ public class User implements Serializable {
     private Role Role;
     @OneToMany(mappedBy = "user")
     private List<Account>account;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "fkClient")
     private List<InsurenceContract> insurenceContract;
 }
