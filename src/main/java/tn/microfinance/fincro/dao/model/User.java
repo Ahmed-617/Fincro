@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -34,4 +35,8 @@ public class User implements Serializable {
     private Date accountCreationDate;
     @Enumerated(EnumType.STRING)
     private Role Role;
+    @OneToMany(mappedBy = "user")
+    private List<Account>account;
+    @OneToMany(mappedBy = "user")
+    private List<Contract>contract;
 }
