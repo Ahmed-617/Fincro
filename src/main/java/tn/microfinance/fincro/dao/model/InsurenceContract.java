@@ -56,5 +56,8 @@ public class InsurenceContract implements Serializable{
    @ManyToOne(cascade = CascadeType.ALL)
     private User fkClient;
 
+   @OneToOne
+    private CaseInsurance caseInsurance;
+
 
 }

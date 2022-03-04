@@ -32,10 +32,7 @@ public class Claim {
     private Date ClaimDate;
 
     @OneToOne
-    private CaseInsurance caseInsurance;
+    private CaseInsurance caseInsur;
 
 
-
-@OneToOne
-    private CaseInsurance caseInsurance;
 }
