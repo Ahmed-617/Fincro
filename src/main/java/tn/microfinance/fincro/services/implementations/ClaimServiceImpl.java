@@ -1,12 +1,13 @@
 package tn.microfinance.fincro.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.Claim;
 import tn.microfinance.fincro.dao.repositories.ClaimRepository;
 import tn.microfinance.fincro.services.interfaces.ClaimService;
 
 import java.util.List;
-
+@Service
 public class ClaimServiceImpl implements ClaimService {
     @Autowired
     ClaimRepository claimRepository;

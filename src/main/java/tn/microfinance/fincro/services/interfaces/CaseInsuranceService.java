@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.CaseInsurance;
 
 import java.util.List;
-@Service
+
 
 public interface CaseInsuranceService {
 

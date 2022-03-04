@@ -5,7 +5,7 @@ import tn.microfinance.fincro.dao.model.Claim;
 import tn.microfinance.fincro.dao.model.MicroCredit;
 
 import java.util.List;
-@Service
+
 public interface ClaimService {
 
 
