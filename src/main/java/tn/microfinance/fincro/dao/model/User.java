@@ -23,6 +23,7 @@ public class User implements Serializable {
     private Integer cin;
     private String lastName;
     private String name;
+    private String sexe;
     @Temporal(TemporalType.DATE)
     private Date birthDate;
     private Integer phoneNumber;
