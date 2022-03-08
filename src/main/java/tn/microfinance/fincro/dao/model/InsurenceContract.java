@@ -33,14 +33,6 @@ public class InsurenceContract implements Serializable{
     @Temporal (TemporalType.DATE)
     private Date dueDateContract;
 
-
-    private Double propertyValue;
-
-
-    @Enumerated(EnumType.STRING)
-    private PropertyType propertyType;
-
-
     private String clauses;
 
 

@@ -12,6 +12,7 @@ import java.util.List;
 public class UserRestController {
     @Autowired
     UserService userService;
+    //URL: http://localhost:8081/SpringMVC/getAllUsers
     @GetMapping("getAllUsers")
     public List<User>getAllUsers() {
         return userService.retrieveAllUsers();
