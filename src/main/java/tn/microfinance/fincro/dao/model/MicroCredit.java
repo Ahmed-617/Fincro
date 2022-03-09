@@ -1,12 +1,13 @@
 package tn.microfinance.fincro.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -15,6 +16,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 public class MicroCredit {
 
     @Id
@@ -23,29 +25,33 @@ public class MicroCredit {
 
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
-    @Column(nullable = false)
+    @NotNull(message = "Start Date cannot be empty")
+    @Future
     private Date startDate;
 
-    @Temporal(TemporalType.DATE)
-    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
-    @Column(nullable = false)
-    private Date dueDate;
+    @Min(value = 2, message = "Period must be equal or greater than 2")
+    @Max(value = 48, message = "Period must be equal or less than 48")
+    @NotNull(message = "Period cannot be empty")
+    private Integer period;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @NotNull(message = "Credit Status cannot be empty")
     private CreditStatus status;
 
-    @Column(nullable = false)
-    private Double ammountCredit;
+    @Min(value = 100, message = "Amount must be equal or greater than 100 DTN")
+    @Max(value = 40000, message = "Amount must be equal or less than than  40.000 DTN")
+    @NotNull(message = "Amount cannot be empty")
+    private Double amountCredit;
 
-    @Column(nullable = false)
-    private Double ammountRemaining;
+    @NotNull(message = "Remaining Amount cannot be empty")
+    private Double amountRemaining;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @NotNull(message = "Credit Type cannot be empty")
     private CreditType creditType;
 
-    @Column(nullable = false)
+    @NotNull(message = "Interest Rate cannot be empty")
+    @Min(value = 7,message = "Interest Rate can't be lower than 7")
     private Double interestRate;
 
     private String cinGuarantor;

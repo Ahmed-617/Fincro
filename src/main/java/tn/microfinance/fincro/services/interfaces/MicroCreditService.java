@@ -16,4 +16,6 @@ public interface MicroCreditService {
     MicroCredit updateCredit(MicroCredit c);
 
     MicroCredit retrieveCredit(Long id);
+
+    void Simulation(double amount,int period,double interest);
 }
