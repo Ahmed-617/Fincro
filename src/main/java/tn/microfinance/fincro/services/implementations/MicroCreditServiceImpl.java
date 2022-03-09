@@ -57,4 +57,17 @@ public class MicroCreditServiceImpl implements MicroCreditService {
 
         return creditRepo.findById(id).get();
     }
+
+    @Override
+    public void Simulation(double amount, int period, double interest) {
+        double mensuality;
+
+        mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
+        System.out.println("Mensuality : "+mensuality);
+        System.out.println("CRD 1 :"+amount);
+        for (int i=2;i<=period;i++){
+            double crd = amount - mensuality;
+            System.out.println("CRD "+i+" :"+crd);
+        }
+    }
 }

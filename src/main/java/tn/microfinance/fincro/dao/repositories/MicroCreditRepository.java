@@ -6,4 +6,5 @@ import tn.microfinance.fincro.dao.model.MicroCredit;
 
 @Repository
 public interface MicroCreditRepository extends CrudRepository<MicroCredit,Long> {
+    //public void Simulation(double amount,int period,double interest);
 }
