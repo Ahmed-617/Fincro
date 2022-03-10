@@ -18,7 +18,7 @@ public class AccountRestController {
     }
 
     @GetMapping("getAccount/{id}")
-    public Account getAccoutById(@PathVariable("id") Integer id){
+    public Account getAccoutById(@PathVariable("id") Long id){
         return accountService.retrieveAccount(id);
     }
 
@@ -33,7 +33,7 @@ public class AccountRestController {
     }
 
     @DeleteMapping("deleteAccount/{id}")
-    public void deleteAccount(@PathVariable("id") Integer id){
+    public void deleteAccount(@PathVariable("id") Long id){
         accountService.deleteAccount(id);
     }
 }
