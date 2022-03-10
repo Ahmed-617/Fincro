@@ -20,8 +20,8 @@ import java.util.List;
 public class Account implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idAccount;
-    private float balance;
+    private Long idAccount;
+    private double balance;
     private String password;
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")

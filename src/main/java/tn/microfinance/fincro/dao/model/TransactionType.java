@@ -1,5 +1,5 @@
 package tn.microfinance.fincro.dao.model;
 
 public enum TransactionType {
-    Deposit,Transfer,Payement
+    Deposit,Transfer,Payement,Income,Scheduled
 }

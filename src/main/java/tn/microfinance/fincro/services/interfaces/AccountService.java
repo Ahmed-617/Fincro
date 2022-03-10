@@ -8,7 +8,7 @@ import java.util.List;
 public interface AccountService {
     List<Account> retrieveAllAccounts();
     Account addAccount(Account t);
-    void deleteAccount(Integer id);
+    void deleteAccount(Long id);
     Account updateAccount(Account t);
-    Account retrieveAccount(Integer id);
+    Account retrieveAccount(Long id);
 }
