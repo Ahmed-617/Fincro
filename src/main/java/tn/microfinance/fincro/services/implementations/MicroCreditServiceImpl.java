@@ -6,6 +6,7 @@ import tn.microfinance.fincro.dao.model.MicroCredit;
 import tn.microfinance.fincro.dao.repositories.MicroCreditRepository;
 import tn.microfinance.fincro.services.interfaces.MicroCreditService;
 
+import java.util.Hashtable;
 import java.util.List;
 
 @Service
@@ -59,15 +60,26 @@ public class MicroCreditServiceImpl implements MicroCreditService {
     }
 
     @Override
-    public void Simulation(double amount, int period, double interest) {
+    public Hashtable<String, Double> Simulation(double amount, int period, double interest) {
+        Hashtable<String, Double> sim = new Hashtable<String, Double>();
         double mensuality;
+        double crd;
+        crd = amount;
+        interest=interest/100;
 
         mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
+        sim.put("Mensuality", mensuality);
         System.out.println("Mensuality : "+mensuality);
-        System.out.println("CRD 1 :"+amount);
+
+        sim.put("CRD 1", crd);
+        System.out.println("CRD 1 :"+crd);
+
         for (int i=2;i<=period;i++){
-            double crd = amount - mensuality;
-            System.out.println("CRD "+i+" :"+crd);
+             crd = crd - (mensuality-(crd*interest));
+             sim.put("CRD "+i, crd);
+            System.out.println("CRD "+i+" : "+crd);
         }
+
+        return sim;
     }
 }

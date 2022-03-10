@@ -2,6 +2,7 @@ package tn.microfinance.fincro.services.interfaces;
 
 import tn.microfinance.fincro.dao.model.MicroCredit;
 
+import java.util.Hashtable;
 import java.util.List;
 
 public interface MicroCreditService {
@@ -17,5 +18,5 @@ public interface MicroCreditService {
 
     MicroCredit retrieveCredit(Long id);
 
-    void Simulation(double amount,int period,double interest);
+    Hashtable<String, Double> Simulation(double amount, int period, double interest);
 }
