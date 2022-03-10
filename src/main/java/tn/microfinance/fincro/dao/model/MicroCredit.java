@@ -30,7 +30,7 @@ public class MicroCredit {
     private Date startDate;
 
     @Min(value = 2, message = "Period must be equal or greater than 2")
-    @Max(value = 48, message = "Period must be equal or less than 48")
+    @Max(value = 84, message = "Period must be equal or less than 48")
     @NotNull(message = "Period cannot be empty")
     private Integer period;
 

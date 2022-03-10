@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.microfinance.fincro.dao.model.MicroCredit;
 import tn.microfinance.fincro.services.interfaces.MicroCreditService;
 
+import java.util.Hashtable;
 import java.util.List;
 
 @RestController
@@ -36,6 +37,11 @@ public class MicroCreditRestController {
     @DeleteMapping("deleteCredit/{id}")
     public void deleteAccount(@PathVariable("id") Long id){
         creditService.deleteCredit(id);
+    }
+
+    @GetMapping("simulator/{amount}/{period}/{interest}")
+    public Hashtable<String, Double> Simulation(@PathVariable double amount, @PathVariable Integer period, @PathVariable double interest ){
+        return creditService.Simulation(amount,period,interest);
     }
 
 
