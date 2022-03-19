@@ -34,10 +34,11 @@ public class User implements Serializable {
     private Float salary;
     @Temporal(TemporalType.DATE)
     private Date accountCreationDate;
-    @Enumerated(EnumType.STRING)
     private Role Role;
     @OneToMany(mappedBy = "user")
     private List<Account>account;
     @OneToMany(mappedBy = "fkClient")
     private List<InsurenceContract> insurenceContract;
+
+
 }
