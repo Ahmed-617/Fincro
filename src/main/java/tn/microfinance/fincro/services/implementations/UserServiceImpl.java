@@ -38,4 +38,29 @@ public class UserServiceImpl implements UserService {
     public User retrieveUser(Integer id) {
         return userRepository.findById(id).get();
     }
+
+    @Override
+    public void deleteUserById(int id) {
+
+    }
+
+    @Override
+    public void updateUserPasswordById(String password, int id) {
+
+    }
+
+    @Override
+    public void updateUser(User u) {
+
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return null;
+    }
+
+    @Override
+    public void addUserGoogle(String email, String s) {
+
+    }
 }

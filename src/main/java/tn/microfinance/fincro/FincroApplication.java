@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import tn.microfinance.fincro.services.interfaces.TransactionService;
+import tn.microfinance.fincro.services.interfaces.UserService;
 
 import java.util.Date;
 
@@ -25,4 +26,10 @@ public class FincroApplication {
 	void executeScheduledTransactions(){
 		transactionService.executeScheduledTransactions();
 	}
+ //commandLineRunner run (UserService userService){
+	//	return  arg->{
+	//		userService.saveRole()
+	//	}
+ //}
 }
+
