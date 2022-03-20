@@ -9,6 +9,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
+import java.util.Hashtable;
 
 @Entity
 @Table( name = "MICROCREDIT")
@@ -58,7 +59,15 @@ public class MicroCredit {
 
     private String guarantorFile;
 
+    private String typePeriod;
+
+    @Transient
+    private static double TMM=6.25;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private  Account accountFK;
+
+    public static double getTMM() {
+        return TMM;
+    }
 }

@@ -18,5 +18,11 @@ public interface MicroCreditService {
 
     MicroCredit retrieveCredit(Long id);
 
-    Hashtable<String, Double> Simulation(double amount, int period, double interest);
+    Hashtable<String, Double> Simulation(double amount, int period,String typePeriod);
+
+    double score(double amount,int period,String typePeriod);
+
+    Hashtable<String,Double> FailureToPay(long idCredit,double crd,double interestAmount);
+
+    double calculateInterest(double score);
 }

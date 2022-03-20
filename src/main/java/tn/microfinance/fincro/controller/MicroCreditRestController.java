@@ -39,9 +39,9 @@ public class MicroCreditRestController {
         creditService.deleteCredit(id);
     }
 
-    @GetMapping("simulator/{amount}/{period}/{interest}")
-    public Hashtable<String, Double> Simulation(@PathVariable double amount, @PathVariable Integer period, @PathVariable double interest ){
-        return creditService.Simulation(amount,period,interest);
+    @GetMapping("simulator/{amount}/{period}/{typePeriod}")
+    public Hashtable<String, Double> Simulation(@PathVariable double amount, @PathVariable int period,@PathVariable String typePeriod ){
+        return creditService.Simulation(amount,period,typePeriod);
     }
 
 
