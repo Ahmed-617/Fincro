@@ -1,6 +1,7 @@
 package tn.microfinance.fincro.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,7 +34,6 @@ public class Transaction implements Serializable {
     private TransactionScheme transactionScheme;
     private Long receiverAccountId;
     private Long senderAccountId;
-
     @ManyToOne
     private Account account;
 

@@ -15,17 +15,11 @@ import java.util.Date;
 @EnableScheduling
 @SpringBootApplication
 public class FincroApplication {
-	@Autowired
-	TransactionService transactionService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(FincroApplication.class, args);
 	}
 
-	@Scheduled(cron = "0 47 22 * * *")
-	void executeScheduledTransactions(){
-		transactionService.executeScheduledTransactions();
-	}
  //commandLineRunner run (UserService userService){
 	//	return  arg->{
 	//		userService.saveRole()
