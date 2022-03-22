@@ -1,9 +1,11 @@
 package tn.microfinance.fincro.services.implementations;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.Account;
 import tn.microfinance.fincro.dao.model.Transaction;
+import tn.microfinance.fincro.dao.model.TransactionScheme;
 import tn.microfinance.fincro.dao.model.TransactionType;
 import tn.microfinance.fincro.dao.repositories.AccountRepository;
 import tn.microfinance.fincro.dao.repositories.TransactionRepository;
@@ -131,12 +133,14 @@ public class TransactionServiceImpl implements TransactionService {
         Account receiverAccount = accountRepository.findById(receiverTransaction.getReceiverAccountId()).get();
         senderTransaction.setAmount(receiverTransaction.getAmount());
         senderTransaction.setTransactionType(TransactionType.Transfer);
+        senderTransaction.setTransactionScheme(TransactionScheme.Normal);
         senderTransaction.setTransactionDate(receiverTransaction.getTransactionDate());
         senderTransaction.setAccount(senderAccount);
         senderTransaction.setReceiverAccountId(receiverTransaction.getReceiverAccountId());
         transactionRepository.save(senderTransaction);
 
         receiverTransaction.setTransactionType(TransactionType.Income);
+        receiverTransaction.setTransactionScheme(TransactionScheme.Normal);
         receiverTransaction.setAccount(receiverAccount);
         transactionRepository.save(receiverTransaction);
 
@@ -160,6 +164,11 @@ public class TransactionServiceImpl implements TransactionService {
             }
 
         }
+    }
+
+    @Scheduled(cron = "30 06 11 * * *")
+    void executeSchedTrans(){
+        executeScheduledTransactions();
     }
 
 }
