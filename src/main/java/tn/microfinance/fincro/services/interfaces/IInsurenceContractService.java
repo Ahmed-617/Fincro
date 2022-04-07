@@ -8,20 +8,20 @@ import java.util.List;
 
 public interface IInsurenceContractService {
 
-    public List<InsurenceContract> retrieveAllContracts();
-    public InsurenceContract addContract(InsurenceContract contract, int propertyId, int clientId);
-    public void deleteContract(String id);
-    public InsurenceContract updateContract(InsurenceContract ip);
-    public InsurenceContract retrieveContract(String id);
-    public void affecterPropertyAContract(int propertyId, int contractId);
-    public void discountPremiumByStat(int contractId);
-    public float PremiumManagementByClientSalary(int clientCIN);
-    public Double PremiumManagementByInsuredPropertyValue(InsurenceContract contract,double premium);
-    public Double PremiumManagementByInsuredPropertyStats(InsurenceContract contract, int propertyId);
-    public Double PremiumManagementByZoning(InsurenceContract contract, User client);
-    public InsurenceContract renewContract(int contractId);
-    public List<InsurenceContract> retrieveAllContractsByClient(int clientCin);
-    public void terminateContract(int contractId);
-    public Double PremiumManagementByContractRank(InsurenceContract contract);
+  List<InsurenceContract> retrieveAllContracts();
+  InsurenceContract addContract(InsurenceContract contract, int propertyId, int clientId);
+  void deleteContract(String id);
+  InsurenceContract updateContract(InsurenceContract ip);
+  InsurenceContract retrieveContract(String id);
+  void affecterPropertyAContract(int propertyId, int contractId);
+  void discountPremiumByStat(int contractId);
+  float PremiumManagementByClientSalary(int clientCIN);
+  Double PremiumManagementByInsuredPropertyValue(InsurenceContract contract,double premium);
+  Double PremiumManagementByInsuredPropertyStats(InsurenceContract contract, int propertyId);
+  Double PremiumManagementByZoning(InsurenceContract contract, User client);
+  InsurenceContract renewContract(int contractId);
+  List<InsurenceContract> retrieveAllContractsByClient(int clientCin);
+  void terminateContract(int contractId);
+  Double PremiumManagementByContractRank(InsurenceContract contract);
 
 }

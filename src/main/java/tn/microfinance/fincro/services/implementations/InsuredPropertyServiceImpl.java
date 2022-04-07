@@ -116,13 +116,13 @@ public class InsuredPropertyServiceImpl implements IPropertyService {
     }
 
     @Override
-    public Double tauxInsuredProperty(PropertyType type){
+    public Double TauxInsuredProperty(PropertyType type){
         return (double) (insuredpropertyRepository.countInsuredPropertyByType(type)/insuredpropertyRepository.countInsuredProperty());
     }
     public double GetLastStockValue() {
         double value = 0;
         try{
-            String excelPath ="E:/4eme/bachta/Classeur1.xlsx";
+            String excelPath ="E:\\Users\\skand\\Documents\\4EME\\Classeur1.xlsx";
             XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
             XSSFSheet sheet = workbook.getSheet("Feuil1");
             value = sheet.getRow(3).getCell(1).getNumericCellValue();

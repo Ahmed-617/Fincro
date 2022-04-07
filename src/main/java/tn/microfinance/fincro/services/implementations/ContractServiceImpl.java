@@ -128,7 +128,7 @@ public class ContractServiceImpl implements IInsurenceContractService {
     public float PremiumManagementByClientSalary(int clientCIN) {
        User clientManagedEntity = clientRepository.findByCin(clientCIN);
         float salary = clientManagedEntity.getSalary();
-        System.out.println("teeeeessst"+clientCIN);
+        System.out.println("test    "+clientCIN);
         if (salary < 150) {
             return (float) (salary * 0.15);
         } else if ((150 <= salary) && (salary < 200)) {
@@ -252,10 +252,10 @@ public class ContractServiceImpl implements IInsurenceContractService {
         contractManagedEntity.setDueDateContract(newDate.toDate());
 
         // Mail Service
-        String email = contractManagedEntity.getFkClient().getEmail();
+        /*String email = contractManagedEntity.getFkClient().getEmail();
         String fname = contractManagedEntity.getFkClient().getName();
         String lname = contractManagedEntity.getFkClient().getLastName();
-
+*/
       //  mailService.prepareAndSend1(email, fname, fname, lname, contractManagedEntity.getClauses(),
              //   contractManagedEntity.getFkInsuredProperty().getPropertyValue(), contractManagedEntity.getPremium();
 
