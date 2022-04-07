@@ -29,7 +29,10 @@ public class User implements Serializable {
     private Integer phoneNumber;
     private String email;
     private String password;
-    private String adress;
+
+    @Enumerated(EnumType.STRING)
+    private Address adress;
+
     private String profession;
     private Float salary;
     @Temporal(TemporalType.DATE)

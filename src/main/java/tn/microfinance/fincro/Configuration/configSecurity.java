@@ -1,4 +1,4 @@
-package tn.microfinance.fincro.Configuration;
+/*package tn.microfinance.fincro.Configuration;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -17,3 +17,4 @@ public class configSecurity extends WebSecurityConfigurerAdapter {
 
 
 }}
+*/

@@ -1,19 +1,67 @@
 package tn.microfinance.fincro.services.implementations;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.InsuredProperty;
+import tn.microfinance.fincro.dao.model.InsurenceContract;
+import tn.microfinance.fincro.dao.model.PropertyType;
+import tn.microfinance.fincro.dao.repositories.ContractRepository;
 import tn.microfinance.fincro.dao.repositories.InsuredPropertyRepository;
 import tn.microfinance.fincro.services.interfaces.IPropertyService;
 
+
+import java.util.List;
 import java.util.Optional;
 
+@Service
 public class InsuredPropertyServiceImpl implements IPropertyService {
     @Autowired
     InsuredPropertyRepository insuredpropertyRepository;
+
+    @Autowired
+    ContractRepository contractRepository;
+
+    public static final Logger L = LogManager.getLogger(InsuredPropertyServiceImpl.class);
+
+    public InsuredPropertyRepository getInsuredProperty() {
+        return insuredpropertyRepository;
+    }
+
+    public void setInsuredProperty(InsuredPropertyRepository InsuredPropertyRepository) {
+        this.insuredpropertyRepository = InsuredPropertyRepository;
+    }
+
+    @Override
+    public List<InsuredProperty> retrieveAllVisibleInsuredProperties() {
+        List<InsuredProperty> InsuredPropertys = (List<InsuredProperty>) insuredpropertyRepository.findAllVisibleInsuredProperties();
+
+        for (InsuredProperty InsuredProperty : InsuredPropertys) {
+            L.info("InsuredProperty +++" + InsuredProperty);
+            ;
+        }
+        return InsuredPropertys;
+    }
+
+    @Override
+    public List<InsuredProperty> retrieveNotVisibleInsuredProperties() {
+        List<InsuredProperty> InsuredPropertys = (List<InsuredProperty>) insuredpropertyRepository.findNotVisibleInsuredProperties();
+
+        for (InsuredProperty InsuredProperty : InsuredPropertys) {
+            L.info("InsuredProperty +++" + InsuredProperty);
+            ;
+        }
+        return InsuredPropertys;
+    }
+
     @Override
     public InsuredProperty addInsuredProperty(InsuredProperty u) {
-
+        System.out.println(GetLastStockValue());
         return insuredpropertyRepository.save(u);
+
     }
 
     @Override
@@ -41,14 +89,48 @@ public class InsuredPropertyServiceImpl implements IPropertyService {
     }
 
     @Override
-    public InsuredProperty retrieveInsuredProperty(String id) {
+    public InsuredProperty retrieveInsuredProperty(String id){
         Optional<InsuredProperty> InsuredPropertyOp = insuredpropertyRepository.findById(Integer.parseInt(id));
         if (InsuredPropertyOp.isPresent()) {
             InsuredPropertyOp.get();
         } else {
             System.out.println("InsuredProperty not found");
         }
-
+        L.info("InsuredProperty +++" + InsuredPropertyOp.get());
         return InsuredPropertyOp.get();
+    }
+
+    @Override
+    public void archiveInsuredProperty (InsuredProperty ip){
+        insuredpropertyRepository.archiveInsuredProperty(ip.getIdProperty());
+        insuredpropertyRepository.save(ip);
+    }
+
+    @Override
+    public void affecterPropertyAContract(int propertyId, int contractId){
+        InsurenceContract contractManagedEntity = contractRepository.findById(contractId).get();
+        InsuredProperty propertyManagedEntity = insuredpropertyRepository.findById(propertyId).get();
+
+        contractManagedEntity.setFkInsuredProperty(propertyManagedEntity);
+        contractRepository.save(contractManagedEntity);
+    }
+
+    @Override
+    public Double tauxInsuredProperty(PropertyType type){
+        return (double) (insuredpropertyRepository.countInsuredPropertyByType(type)/insuredpropertyRepository.countInsuredProperty());
+    }
+    public double GetLastStockValue() {
+        double value = 0;
+        try{
+            String excelPath ="E:/4eme/bachta/Classeur1.xlsx";
+            XSSFWorkbook workbook = new XSSFWorkbook(excelPath);
+            XSSFSheet sheet = workbook.getSheet("Feuil1");
+            value = sheet.getRow(3).getCell(1).getNumericCellValue();
+
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return value;
     }
 }

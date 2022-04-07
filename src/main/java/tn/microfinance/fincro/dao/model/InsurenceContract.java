@@ -1,5 +1,6 @@
 package tn.microfinance.fincro.dao.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Entity(name ="CONTRACT")
 @Table(name ="CONTRACT")
 public class InsurenceContract implements Serializable{
@@ -44,10 +46,13 @@ public class InsurenceContract implements Serializable{
 
     private boolean visibility;
 
-
+    @JsonIgnore
    @ManyToOne(cascade = CascadeType.ALL)
     private User fkClient;
-
+    @JsonIgnore
+    @OneToOne
+    private InsuredProperty fkInsuredProperty;
+    @JsonIgnore
    @OneToOne
     private CaseInsurance caseInsurance;
 

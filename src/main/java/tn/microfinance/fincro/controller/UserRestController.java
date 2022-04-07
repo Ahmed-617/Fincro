@@ -5,10 +5,13 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+/*
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
+*/
+
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +28,7 @@ public class UserRestController {
     @Autowired
     UserService userService;
     @Autowired
-    private OAuth2AuthorizedClientService authorizedClientService;
+    //private OAuth2AuthorizedClientService authorizedClientService;
 
     //URL: http://localhost:8081/SpringMVC/getAllUsers
     @GetMapping("getAllUsers")
@@ -68,7 +71,7 @@ public class UserRestController {
     public String notRestricted() {
         return "you don't need to be logged in";
     }
-    @GetMapping("/restricted")
+    /*@GetMapping("/restricted")
     public String restricted(OAuth2AuthenticationToken auth2AuthenticationToken,Model model) {
 
         OAuth2AuthorizedClient client=authorizedClientService.loadAuthorizedClient(
@@ -90,7 +93,7 @@ public class UserRestController {
         }
         return "if you see this you are logged in "+ tmp ;
     }
-
+*/
 
 }
 
