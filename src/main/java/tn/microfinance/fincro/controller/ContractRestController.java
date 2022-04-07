@@ -29,7 +29,7 @@ public class ContractRestController {
     @PostMapping("/add-contract/{idProperty}/{idClient}")
     public void addContract(@RequestBody InsurenceContract contract, @PathVariable("idProperty") int propertyId,
                             @PathVariable("idClient") String cin) {
-        contractService.addContract(contract, propertyId, cin);
+        contractService.addContract(contract, propertyId, Integer.parseInt(cin));
     }
 
 

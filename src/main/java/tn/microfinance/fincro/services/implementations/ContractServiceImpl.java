@@ -125,9 +125,10 @@ public class ContractServiceImpl implements IInsurenceContractService {
     }
 
     @Override
-    public float PremiumManagementByClientSalary(String clientCIN) {
+    public float PremiumManagementByClientSalary(int clientCIN) {
        User clientManagedEntity = clientRepository.findByCin(clientCIN);
         float salary = clientManagedEntity.getSalary();
+        System.out.println("teeeeessst"+clientCIN);
         if (salary < 150) {
             return (float) (salary * 0.15);
         } else if ((150 <= salary) && (salary < 200)) {
@@ -196,7 +197,7 @@ public class ContractServiceImpl implements IInsurenceContractService {
     }
 
     @Override
-    public InsurenceContract addContract(InsurenceContract contract, int propertyId, String clientCIN) {
+    public InsurenceContract addContract(InsurenceContract contract, int propertyId, int clientCIN) {
 
         // Assigning the Insured Property and the Client to the contract
         InsuredProperty propertyManagedEntity = propertyRepository.findById(propertyId).get();
@@ -225,22 +226,6 @@ public class ContractServiceImpl implements IInsurenceContractService {
 
         // Calculating Premium using Contract's rank value
         contract.setPremium(PremiumManagementByContractRank(contract));
-
-        // Mail Service
-       // mailService.prepareAndSend(clientManagedEntity.getMailClient(), clientManagedEntity.getfNameClient(),
-             //   clientManagedEntity.getfNameClient(), clientManagedEntity.getlNameClient(), contract.getClauses(),
-          //      propertyManagedEntity.getPropertyValue(), contract.getPremium());
-
-        // SMS Service
-/*		String Newligne=System.getProperty("line.separator");
-		Twilio.init(ACCOUNT_SID, AUTH_TOKEN);
-		Message message = Message.creator(
-				new PhoneNumber("+21692099542"), // To number
-				new PhoneNumber("+21692099542"), // From number
-				"Welcome to MycroA"+clientManagedEntity.getfNameClient()+" "+clientManagedEntity.getlNameClient()+Newligne+"We are delighted to have you on board !" // SMS body
-		).create();*/
-
-
         return contractRepository.save(contract);
     }
 
@@ -330,7 +315,7 @@ public class ContractServiceImpl implements IInsurenceContractService {
     }
 
     @Override
-    public List<InsurenceContract> retrieveAllContractsByClient(String clientCin) {
+    public List<InsurenceContract> retrieveAllContractsByClient(int  clientCin) {
         List<InsurenceContract> Contracts = (List<InsurenceContract>) contractRepository.findContractsByClientCIN(clientCin);
 
         for (InsurenceContract InsurenceContract : Contracts) {

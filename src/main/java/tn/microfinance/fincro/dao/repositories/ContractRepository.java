@@ -19,13 +19,13 @@ public interface ContractRepository extends CrudRepository<InsurenceContract,Int
     @Query("SELECT count(cont) from CONTRACT cont "
             + "join cont.fkClient cl "
             + "Where cl.cin = :cin")
-    public int countContractNumberByClientCIN(@Param("cin")String cin);
+    public int countContractNumberByClientCIN(@Param("cin")int cin);
 
     @Query("SELECT cont from CONTRACT cont "
             + "join cont.fkClient cl "
             + "Where cl.cin = :cin "
             + "AND cont.visibility = true")
-    public List<InsurenceContract> findContractsByClientCIN(@Param("cin")String cin);
+    public List<InsurenceContract> findContractsByClientCIN(@Param("cin")int cin);
 
     @Query("SELECT cont from CONTRACT cont "
             + "Where cont.visibility = true")
