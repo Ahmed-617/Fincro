@@ -6,3 +6,8 @@ spring:
           google:
             client-id: 863752897285-pg3eoui6r9uulfiucspgdb7519v38fo5.apps.googleusercontent.com
             client-secret: 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
+
+twilio:
+  account_sid: ACc4d2caa3df451680028dbce96d843f30
+  auth_token: 83a2dca39464996633080221ee57b8d7
+  trial_number: +13186978088
