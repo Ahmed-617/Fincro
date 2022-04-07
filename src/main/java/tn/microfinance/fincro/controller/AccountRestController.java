@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tn.microfinance.fincro.dao.model.Account;
 import tn.microfinance.fincro.services.interfaces.AccountService;
+import tn.microfinance.fincro.services.interfaces.UserService;
 
 import java.util.List;
 
@@ -11,6 +12,8 @@ import java.util.List;
 public class AccountRestController {
     @Autowired
     AccountService accountService;
+    @Autowired
+    UserService userService;
 
     @GetMapping("getAllAccounts")
     public List<Account> getAccounts(){
@@ -22,8 +25,9 @@ public class AccountRestController {
         return accountService.retrieveAccount(id);
     }
 
-    @PostMapping("addAccount")
-    public Account addAccount(@RequestBody Account account){
+    @PostMapping("addAccount/{id}")
+    public Account addAccount(@RequestBody Account account,@PathVariable("id") int id){
+        account.setUser(userService.retrieveUser(id));
         return accountService.addAccount(account);
     }
 
@@ -35,5 +39,13 @@ public class AccountRestController {
     @DeleteMapping("deleteAccount/{id}")
     public void deleteAccount(@PathVariable("id") Long id){
         accountService.deleteAccount(id);
+    }
+
+    @GetMapping("getBalance/{id}")
+    public double getBalance(@PathVariable("id") Long id){return accountService.getBalance(id);}
+
+    @PutMapping("verifictionCode/{id}/{code}")
+    public void verifCode(@PathVariable("id") Long id, @PathVariable("code") String code){
+        accountService.setAleaCode(id,code);
     }
 }
