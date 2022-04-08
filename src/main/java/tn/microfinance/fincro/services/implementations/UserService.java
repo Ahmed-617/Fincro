@@ -206,7 +206,7 @@ public User findUserById (Long id){
 
 
     public List<User> getUsers() {
-        return userRepository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 
     public User findUserByUsername(String username) {

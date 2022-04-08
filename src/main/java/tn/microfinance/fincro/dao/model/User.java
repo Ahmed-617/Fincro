@@ -37,6 +37,8 @@ public class User implements Serializable {
     private String email;
     private float surplusRatio;
     private String profileImageUrl;
+    private float salary;
+    private int cin;
 //
     @Enumerated(EnumType.STRING)
     private PersonalSituation personalSituation;
