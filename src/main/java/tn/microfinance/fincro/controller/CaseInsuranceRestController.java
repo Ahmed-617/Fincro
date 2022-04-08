@@ -7,6 +7,7 @@ import tn.microfinance.fincro.dao.model.CaseInsurance;
 import tn.microfinance.fincro.services.interfaces.CaseInsuranceService;
 
 import java.util.List;
+//
 
 @RestController
 public class CaseInsuranceRestController {

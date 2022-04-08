@@ -19,3 +19,4 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     List<User> findAllByGuarantorSalaryIsGreaterThanEqual(int salary);
 }
+//

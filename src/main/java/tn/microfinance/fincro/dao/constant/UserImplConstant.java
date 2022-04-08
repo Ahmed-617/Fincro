@@ -9,3 +9,4 @@ public class UserImplConstant {
     public static final String NO_USER_FOUND_BY_EMAIL = "NO user found for email:";
     public static final String DEFAULT_USER_IMAGE_PATH = "/user/image/profile/temp";
 }
+//

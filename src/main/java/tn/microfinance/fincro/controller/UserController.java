@@ -139,7 +139,7 @@ public class UserController {
             }
         }
         return byteArrayOutputStream.toByteArray();
-    }
+    }//
 
     @GetMapping("/matching/{id}")
     public void getUserSurplusRatio(@PathVariable Long id) throws UserNotFoundException {

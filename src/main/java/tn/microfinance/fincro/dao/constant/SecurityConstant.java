@@ -15,3 +15,4 @@ public class SecurityConstant {
             "/api/users/resetPassword/**" };
     //public static final String[] PUBLIC_URLS = { "**" };
 }
+//

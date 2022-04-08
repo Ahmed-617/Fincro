@@ -26,3 +26,4 @@ public interface MicroCreditService {
 
     double calculateInterest(double score);
 }
+//

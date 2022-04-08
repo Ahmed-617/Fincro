@@ -1,6 +1,6 @@
 package tn.microfinance.fincro.dao.model;
 import static tn.microfinance.fincro.dao.constant.Authority.*;
-
+//
 public enum Role {
     ROLE_CLIENT(CLIENT_AUTHORITIES),
     ROLE_GUARANTOR( GUARANTOR_AUTHORITIES ),

@@ -37,4 +37,4 @@ public class CaseInsuranceImpl implements CaseInsuranceService {
     public CaseInsurance retrieveCase(Long id) {
         return caseInsuranceRepository.findById(id).get();
     }
-}
+}//

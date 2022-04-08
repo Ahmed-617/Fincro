@@ -8,3 +8,4 @@ public interface IPropertyService {
     public InsuredProperty updateInsuredProperty(InsuredProperty ip);
     public InsuredProperty retrieveInsuredProperty(String id);
 }
+//

@@ -34,7 +34,7 @@ public class LoginAttemptService {
             e.printStackTrace();
         }
         loginAttemptCache.put(username, attempts);
-    }
+    }//
     public boolean hasExceededMaxAttempts(String username) {
         try {
             return loginAttemptCache.get(username) >= MAXIMUM_NUMBER_OF_ATTEMPTS;

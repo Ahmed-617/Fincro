@@ -15,6 +15,7 @@ public class HttpResponse {
 
     // Constructor never used. Can be (and should be) deleted
     public HttpResponse() {}
+    //
 
     public HttpResponse(int httpStatusCode, HttpStatus httpStatus, String reason, String message) {
         this.timeStamp = new Date();

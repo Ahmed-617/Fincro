@@ -4,4 +4,5 @@ public enum PersonalSituation {
     SINGLE,
     MARRIED,
     DIVORCED
+    //
 }

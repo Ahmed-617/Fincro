@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.microfinance.fincro.Configuration.TwilioConfig;
+import tn.microfinance.fincro.Configuration.TwilioConfiguration;
 import tn.microfinance.fincro.dao.model.SmsRequest;
 import tn.microfinance.fincro.services.interfaces.SmsSender;
 
@@ -17,10 +17,10 @@ public class TwilioSmsSender implements SmsSender {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TwilioSmsSender.class);
 
-    private final TwilioConfig twilioConfiguration;
+    private final TwilioConfiguration twilioConfiguration;
 
     @Autowired
-    public TwilioSmsSender(TwilioConfig twilioConfiguration) {
+    public TwilioSmsSender(TwilioConfiguration twilioConfiguration) {
         this.twilioConfiguration = twilioConfiguration;
     }
 

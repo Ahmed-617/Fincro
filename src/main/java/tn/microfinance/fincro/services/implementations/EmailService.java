@@ -31,7 +31,7 @@ public class EmailService {
         properties.put(SMTP_STARTTLS_ENABLE, true);
         properties.put(SMTP_STARTTLS_REQUIRED, true);
         return Session.getInstance(properties, null);
-    }
+    }//
 
     private Message createEmail(String firstName, String password, String email) throws MessagingException {
         Message message = new MimeMessage(getEmailSession());

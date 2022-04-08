@@ -62,7 +62,9 @@ public class UserService implements UserDetailsService {
         this.smsService = smsService;
     }
 
-
+public User findUserById (Long id){
+        return userRepository.findById(id).get();
+}
     public void setScore(Long userId) throws UserNotFoundException {
 
         User user = userRepository.findById(userId)

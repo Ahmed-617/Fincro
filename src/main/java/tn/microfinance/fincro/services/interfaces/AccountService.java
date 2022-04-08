@@ -11,4 +11,6 @@ public interface AccountService {
     void deleteAccount(Long id);
     Account updateAccount(Account t);
     Account retrieveAccount(Long id);
+    double getBalance(long accountId);
+    void setAleaCode(long accountId, String code);
 }

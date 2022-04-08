@@ -27,6 +27,7 @@ import static java.util.Arrays.stream;
         public Collection<? extends GrantedAuthority> getAuthorities() {
             return stream(this.user.getAuthorities()).map(SimpleGrantedAuthority:: new).collect(Collectors.toList());
         }
+        //
 
         @Override
         public String getPassword() {

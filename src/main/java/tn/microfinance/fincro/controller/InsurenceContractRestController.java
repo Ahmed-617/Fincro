@@ -7,7 +7,7 @@ import tn.microfinance.fincro.dao.model.InsurenceContract;
 
 import tn.microfinance.fincro.services.interfaces.IInsurenceContractService;
 
-
+//
 
 public class InsurenceContractRestController {
 

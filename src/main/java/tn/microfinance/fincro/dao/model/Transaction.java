@@ -1,6 +1,7 @@
 package tn.microfinance.fincro.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,13 +30,14 @@ public class Transaction implements Serializable {
     private Date transactionDate;
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
-    @Enumerated(EnumType.STRING)
-    private TransactionScheme transactionScheme;
+    //@Enumerated(EnumType.STRING)
+    private String transactionScheme;
     private Long receiverAccountId;
     private Long senderAccountId;
-
     @ManyToOne
     private Account account;
+
+
 
 
 
