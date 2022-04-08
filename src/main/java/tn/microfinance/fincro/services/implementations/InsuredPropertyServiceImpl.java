@@ -75,6 +75,7 @@ public class InsuredPropertyServiceImpl implements IPropertyService {
         }
 
     }
+    //
 
     @Override
     public InsuredProperty updateInsuredProperty(InsuredProperty u) {

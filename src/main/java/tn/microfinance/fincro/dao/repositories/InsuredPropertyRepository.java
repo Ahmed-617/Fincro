@@ -47,3 +47,4 @@ public interface InsuredPropertyRepository extends CrudRepository<InsuredPropert
 
 
 }
+//

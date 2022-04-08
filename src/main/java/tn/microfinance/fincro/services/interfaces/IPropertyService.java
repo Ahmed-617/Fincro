@@ -29,3 +29,4 @@ public interface IPropertyService {
 
   Double TauxInsuredProperty(PropertyType type);
 }
+//

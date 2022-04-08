@@ -30,12 +30,14 @@ public class Transaction implements Serializable {
     private Date transactionDate;
     @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
-    @Enumerated(EnumType.STRING)
-    private TransactionScheme transactionScheme;
+    //@Enumerated(EnumType.STRING)
+    private String transactionScheme;
     private Long receiverAccountId;
     private Long senderAccountId;
     @ManyToOne
     private Account account;
+
+
 
 
 

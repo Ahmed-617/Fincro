@@ -24,4 +24,4 @@ public interface IInsurenceContractService {
   void terminateContract(int contractId);
   Double PremiumManagementByContractRank(InsurenceContract contract);
 
-}
+}//

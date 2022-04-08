@@ -38,5 +38,12 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "accountFK")
     private List<MicroCredit> microCredits;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "accountIv")
+    private List<Investment> investments;
+
+    private boolean secured;
+    private String aleaCode;
+
 
 }

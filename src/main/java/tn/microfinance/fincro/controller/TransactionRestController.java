@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import tn.microfinance.fincro.dao.model.Account;
 import tn.microfinance.fincro.dao.model.Transaction;
 import tn.microfinance.fincro.dao.model.TransactionScheme;
+import tn.microfinance.fincro.dao.model.TransactionType;
 import tn.microfinance.fincro.services.interfaces.AccountService;
 import tn.microfinance.fincro.services.interfaces.TransactionService;
 
@@ -34,8 +35,8 @@ public class TransactionRestController {
     }
 
     @PostMapping("scheduleTransactions/{rep}")
-    public void scheduleTransactions(@RequestBody Transaction transaction, @PathVariable("rep") int rep){
-        transactionService.scheduleTransactions(transaction,rep);
+    public Calendar scheduleTransactions(@RequestBody Transaction transaction, @PathVariable("rep") int rep){
+        return transactionService.scheduleTransactions(transaction,rep);
     }
 
     @GetMapping("executeScheduledTransactions")
@@ -54,4 +55,17 @@ public class TransactionRestController {
         transactionService.deleteAllTransactions();
     }
 
+    @GetMapping("getUserTranactions/{type}/{id}")
+    public List<Transaction> getTransactionsByType(@PathVariable("type") TransactionType transactionType, @PathVariable("id") Long id){
+        return transactionService.findAccountTransByType(transactionType,id); }
+
+    @GetMapping("getNbreOfTrans/{type}/{id}")
+    public int getNbreOfTrans(@PathVariable("type") TransactionType transactionType, @PathVariable("id") Long id){
+        return transactionService.getTransNbreByAccountAndType(transactionType,id);
+    }
+
+    @PostMapping("transferMoney")
+    public void transferMoney(@RequestBody Transaction transaction) throws IllegalAccessException, InterruptedException {
+        transactionService.transferMoney(transaction);
+    }
 }

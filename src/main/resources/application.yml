@@ -1,8 +1,4 @@
-spring:
-  security:
-    oauth2:
-      client:
-        registration:
-          google:
-            client-id: 17447484718-e76uttlafk3jgs6p6f7a1fcn20qdeme1.apps.googleusercontent.com
-            client-secret: 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
+twilio:
+  account_sid: ACc4d2caa3df451680028dbce96d843f30
+  auth_token: 83a2dca39464996633080221ee57b8d7
+  trial_number: +13186978088
