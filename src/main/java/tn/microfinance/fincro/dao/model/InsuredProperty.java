@@ -21,6 +21,7 @@ import javax.persistence.Table;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+
 @Entity(name ="INSUREDPROPERTY")
 @Table(name ="INSUREDPROPERTY")
 public class InsuredProperty implements Serializable {
@@ -41,7 +42,7 @@ public class InsuredProperty implements Serializable {
 
     private boolean visibility;
 
-    private String TitreDePropriete;
+
 
     @Override
     public String toString() {

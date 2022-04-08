@@ -15,14 +15,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name="user")
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String firstName;
     private String lastName;
-    private String address;
-    private String profileImageUrl;
+    @Enumerated(EnumType.STRING)
+    private Address adress;
     private String profession;
     private Date lastLoginDate;
     private String gender;
@@ -35,6 +36,9 @@ public class User implements Serializable {
     private String password;
     private String email;
     private float surplusRatio;
+    private String profileImageUrl;
+    private float salary;
+    private int cin;
 //
     @Enumerated(EnumType.STRING)
     private PersonalSituation personalSituation;

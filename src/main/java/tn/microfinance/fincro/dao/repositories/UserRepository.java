@@ -7,7 +7,8 @@ import tn.microfinance.fincro.dao.model.User;
 
 import java.util.List;
 
-public interface UserRepository extends JpaRepository<User,Long> {
+@Repository
+public interface UserRepository extends CrudRepository<User, Long> {
 
     User findUserByUsername(String username);
 
@@ -18,5 +19,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
     List<User> findAllByScoreIsGreaterThanEqual(int score);
 
     List<User> findAllByGuarantorSalaryIsGreaterThanEqual(int salary);
+    User findByCin( int  cin );
 }
-//
