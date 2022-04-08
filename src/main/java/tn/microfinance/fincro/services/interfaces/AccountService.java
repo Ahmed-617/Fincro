@@ -11,4 +11,8 @@ public interface AccountService {
     void deleteAccount(Integer id);
     Account updateAccount(Account t);
     Account retrieveAccount(Integer id);
+
+    public static void addAmount(float amount, Account b) {
+
+    }
 }

@@ -31,5 +31,15 @@ public class Account implements Serializable {
     @OneToMany(mappedBy = "accountFK")
     private List<MicroCredit> microCredits;
 
+    public Integer getIdBalance() {
+        return idAccount;
+    }
 
+    public float getAmount() {
+        return balance;
+    }
+
+    public void setAmount(float amount) {
+        this.balance = amount;
+    }
 }

@@ -39,4 +39,20 @@ public class User implements Serializable {
     private List<Account>account;
     @OneToMany(mappedBy = "fkClient")
     private List<InsurenceContract> insurenceContract;
+    @OneToOne
+    private Account fkBalance;
+
+    public int getIdClient() {
+        return idUser;
+    }
+
+    public Account getFkBalance() {
+        return fkBalance;
+    }
+
+    public void setFkBalance(Account fkBalance) {
+        this.fkBalance = fkBalance;
+    }
+
+
 }

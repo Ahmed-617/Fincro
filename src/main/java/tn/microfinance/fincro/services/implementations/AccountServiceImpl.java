@@ -38,4 +38,10 @@ public class AccountServiceImpl implements AccountService {
     public Account retrieveAccount(Integer id) {
         return accountRepository.findById(id).get();
     }
+
+    public void addAmount(Double amount,Account b){
+        Double temp = Double.valueOf(b.getAmount());
+        b.setAmount((float) (amount+temp));
+        accountRepository.save(b);
+    }
 }

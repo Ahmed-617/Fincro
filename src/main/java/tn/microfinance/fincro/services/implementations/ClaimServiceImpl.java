@@ -1,5 +1,7 @@
 package tn.microfinance.fincro.services.implementations;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.microfinance.fincro.dao.model.Claim;
@@ -13,9 +15,23 @@ public class ClaimServiceImpl implements ClaimService {
     ClaimRepository claimRepository;
 
 
+
+    public ClaimRepository getClaimRepository() {
+        return claimRepository; }
+
+    public void setClaimRepository(ClaimRepository claimRepository) {
+        this.claimRepository = claimRepository; }
+
+
+    private static final Logger l = (Logger) LogManager.getLogger(ClaimServiceImpl.class);
+
     @Override
-    public List<Claim> retrieveAllClaims() {
-        return (List<Claim>) claimRepository.findAll();
+    public List<Claim> retrieveAllClaims(){
+        List<Claim> claims = (List<Claim>) claimRepository.getAllClaims();
+        for (Claim claim : claims){
+            l.info("Claim +++ :"+ claim);
+        }
+        return claims;
     }
 
     @Override

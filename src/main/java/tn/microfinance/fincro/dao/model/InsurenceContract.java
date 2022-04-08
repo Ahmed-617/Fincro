@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.PropertyAccessor;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -58,6 +59,12 @@ public class InsurenceContract implements Serializable{
 
    @OneToOne
     private CaseInsurance caseInsurance;
+    @OneToOne
+    private InsuredProperty fkInsuredProperty;
 
 
+    public InsuredProperty getFkInsuredProperty() {
+        return fkInsuredProperty;
+
+    }
 }
