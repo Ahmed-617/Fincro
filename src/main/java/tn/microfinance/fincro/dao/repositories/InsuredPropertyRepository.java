@@ -7,3 +7,4 @@ import tn.microfinance.fincro.dao.model.InsuredProperty;
 
 public interface InsuredPropertyRepository extends CrudRepository<InsuredProperty,Integer > {
 }
+//

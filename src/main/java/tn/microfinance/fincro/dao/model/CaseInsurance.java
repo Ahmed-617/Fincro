@@ -36,7 +36,7 @@ public class CaseInsurance {
     @OneToOne(mappedBy = "caseInsurance")
     private InsurenceContract contract;
 
-
+//
 
 
 

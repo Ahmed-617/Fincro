@@ -10,3 +10,4 @@ public interface InsurenceContractRepository extends CrudRepository<InsurenceCon
 
 
 }
+//

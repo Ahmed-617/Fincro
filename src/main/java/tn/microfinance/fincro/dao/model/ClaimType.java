@@ -4,3 +4,4 @@ public enum ClaimType {
     HOME,AUTO,ACCIDENT
 
 }
+//

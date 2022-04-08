@@ -10,4 +10,4 @@ public interface IInsurenceContractService {
     public InsurenceContract updateContract(InsurenceContract ip);
     public InsurenceContract retrieveContract(String id);
 
-}
+}//

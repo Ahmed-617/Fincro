@@ -26,7 +26,7 @@ public class InsurenceContractServiceImpl implements IInsurenceContractService {
             System.out.println("Insurence Contract not found");
         }
     }
-
+//
     @Override
     public InsurenceContract updateContract(InsurenceContract u) {
         int t = u.getIdContract();

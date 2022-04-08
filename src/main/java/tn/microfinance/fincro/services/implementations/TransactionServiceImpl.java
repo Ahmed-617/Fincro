@@ -205,9 +205,9 @@ public class TransactionServiceImpl implements TransactionService {
         senderAccount.setBalance(senderAccount.getBalance()- receiverTransaction.getAmount());
         receiverAccount.setBalance(receiverAccount.getBalance()+ receiverTransaction.getAmount());
         sendSms(new SmsRequest(senderAccount.getUser().getPhoneNumber().toString(),
-                "Une transaction de "+receiverTransaction.getAmount()+" DT a été effectuée au favoris de Mr/Mme " + receiverAccount.getUser().getLastName()+" " + receiverAccount.getUser().getName()+" . Votre solde restant est de "+senderAccount.getBalance()+" DT."));
+                "Une transaction de "+receiverTransaction.getAmount()+" DT a été effectuée au favoris de Mr/Mme " + receiverAccount.getUser().getLastName()+" " + receiverAccount.getUser().getFirstName()+" . Votre solde restant est de "+senderAccount.getBalance()+" DT."));
         sendSms(new SmsRequest(receiverAccount.getUser().getPhoneNumber().toString(),
-                "Vous avez reçu un montant de "+receiverTransaction.getAmount()+" DT de la part de Mr/Mme "+ senderAccount.getUser().getLastName()+ " "+senderAccount.getUser().getName()+" . Votre solde total est de "+receiverAccount.getBalance()+" DT."));
+                "Vous avez reçu un montant de "+receiverTransaction.getAmount()+" DT de la part de Mr/Mme "+ senderAccount.getUser().getLastName()+ " "+senderAccount.getUser().getFirstName()+" . Votre solde total est de "+receiverAccount.getBalance()+" DT."));
         accountRepository.save(senderAccount);
         accountRepository.save(receiverAccount);
         }
@@ -233,7 +233,7 @@ public class TransactionServiceImpl implements TransactionService {
                 Account senderAccount = accountRepository.findById(tran.getSenderAccountId()).get();
                 Account receiverAccount = accountRepository.findById(tran.getReceiverAccountId()).get();
                 sendSms(new SmsRequest(senderAccount.getUser().getPhoneNumber().toString(),
-                        "Une transaction de "+tran.getAmount()+" DT sera effectuée après 3 jours au favoris de Mr/Mme "+receiverAccount.getUser().getLastName()+" "+receiverAccount.getUser().getName()+". Assurez-vous que votre solde est supérieur au montant demandé ou vous serez pénaliser"));
+                        "Une transaction de "+tran.getAmount()+" DT sera effectuée après 3 jours au favoris de Mr/Mme "+receiverAccount.getUser().getLastName()+" "+receiverAccount.getUser().getFirstName()+". Assurez-vous que votre solde est supérieur au montant demandé ou vous serez pénaliser"));
             }
 
         }

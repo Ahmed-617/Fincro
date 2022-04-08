@@ -35,4 +35,4 @@ public class Claim {
     private CaseInsurance caseInsur;
 
 
-}
+}//
