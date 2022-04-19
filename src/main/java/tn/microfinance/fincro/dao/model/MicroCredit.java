@@ -1,6 +1,7 @@
 package tn.microfinance.fincro.dao.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 import java.util.Hashtable;
-//
+
 @Entity
 @Table( name = "MICROCREDIT")
 @Getter
@@ -27,7 +28,6 @@ public class MicroCredit {
     @Temporal(TemporalType.DATE)
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
     @NotNull(message = "Start Date cannot be empty")
-    @Future
     private Date startDate;
 
     @Min(value = 2, message = "Period must be equal or greater than 2")
@@ -47,6 +47,9 @@ public class MicroCredit {
     @NotNull(message = "Remaining Amount cannot be empty")
     private Double amountRemaining;
 
+    @NotNull(message = "Payed Amount cannot be empty")
+    private Double payedAmount;
+
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Credit Type cannot be empty")
     private CreditType creditType;
@@ -64,6 +67,7 @@ public class MicroCredit {
     @Transient
     private static double TMM=6.25;
 
+    @JsonIgnore
     @ManyToOne(cascade = CascadeType.ALL)
     private  Account accountFK;
 
