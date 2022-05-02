@@ -29,7 +29,9 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
@@ -42,24 +44,44 @@ import static tn.microfinance.fincro.dao.constant.SecurityConstant.JWT_TOKEN_HEA
 @RequestMapping("/api/users")
 @AllArgsConstructor
 public class UserController {
+
     private final UserService userService;
     public static final String EMAIL_SENT = "An email with a new password was sent :";
     public static final String USER_DELETE_SUCCESSFULLY = "User deleted successfully";
     private final AuthenticationManager authenticationManager;
     private final JWTTokenProvider jwtTokenProvider;
 
+    /*
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) {
         authenticate(user.getUsername(), user.getPassword());
         User loginUser = userService.findUserByUsername(user.getUsername());
         UserPrincipal userPrincipal = new UserPrincipal(loginUser);
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
-        return new ResponseEntity<>(loginUser, jwtHeader, OK);
+        //return jwtTokenProvider.generateJwtToken(userPrincipal);
+
+        return new ResponseEntity<>( loginUser,jwtHeader, OK);
+    } */
+
+    @CrossOrigin("http://localhost:4200")
+    @GetMapping("/login/{username}/{password}")
+    public Map<String, String> login(@PathVariable("username") String username, @PathVariable("password") String password) {
+        authenticate(username, password);
+        User loginUser = userService.findUserByUsername(username);
+        UserPrincipal userPrincipal = new UserPrincipal(loginUser);
+        HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
+        Map<String,String> map = new HashMap<>() ;
+        map.put("token",jwtTokenProvider.generateJwtToken(userPrincipal));
+        return map;
+
     }
 
+
+    @CrossOrigin("http://localhost:4200")
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) throws UserNotFoundException, UsernameExistException, EmailExistException, MessagingException {
-        User newUser = userService.register(user.getFirstName(), user.getLastName(), user.getUsername(), user.getEmail(),user.getGender(),user.getPhoneNumber(),user.getProfession(),user.getGuarantorSalary(),user.getPersonalSituation(),user.getBirthDate());
+        User newUser = userService.register(user.getFirstName(), user.getLastName(), user.getEmail(), user.getEmail(),user.getGender(),user.getPhoneNumber(),user.getProfession(),user.getGuarantorSalary(),user.getPersonalSituation(),user.getBirthDate());
         return new ResponseEntity<>(newUser, HttpStatus.OK);
     }
 
@@ -95,6 +117,9 @@ public class UserController {
         User updatedUser = userService.updateUser(currentUsername, firstName, lastName, username,email, role, Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive), profileImage);
         return new ResponseEntity<>(updatedUser, OK);
     }
+
+    @CrossOrigin("http://localhost:4200")
+    @PreAuthorize("hasAnyAuthority('user:read')")
     @GetMapping("/find/{username}")
     public ResponseEntity<User> getUser(@PathVariable("username") String username){
         User user = userService.findUserByUsername(username);
