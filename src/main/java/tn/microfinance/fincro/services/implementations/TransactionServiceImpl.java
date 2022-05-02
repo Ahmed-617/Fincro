@@ -232,7 +232,7 @@ public class TransactionServiceImpl implements TransactionService {
             else if (sdf.format(smsDate).equals(sdf.format(tran.getTransactionDate()))){
                 Account senderAccount = accountRepository.findById(tran.getSenderAccountId()).get();
                 Account receiverAccount = accountRepository.findById(tran.getReceiverAccountId()).get();
-                sendSms(new SmsRequest(senderAccount.getUser().getPhoneNumber().toString(),
+                sendSms(new SmsRequest(senderAccount.getUser().getPhoneNumber(),
                         "Une transaction de "+tran.getAmount()+" DT sera effectuée après 3 jours au favoris de Mr/Mme "+receiverAccount.getUser().getLastName()+" "+receiverAccount.getUser().getFirstName()+". Assurez-vous que votre solde est supérieur au montant demandé ou vous serez pénaliser"));
             }
 
