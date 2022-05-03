@@ -23,6 +23,7 @@ public class MicroCreditRestController {
     MicroCreditService creditService;
 
     @GetMapping("getAllCredits")
+    @CrossOrigin(origins = "http://localhost:4200")
     public List<MicroCredit> getCredits(){
         return creditService.retrieveAllCredits();
     }
@@ -33,6 +34,7 @@ public class MicroCreditRestController {
     }
 
     @PostMapping("addCredit/{idAccount}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public MicroCredit addCredit(@RequestBody MicroCredit credit,@PathVariable("idAccount") long idAccount){
         return creditService.addCredit(credit,idAccount);
     }
