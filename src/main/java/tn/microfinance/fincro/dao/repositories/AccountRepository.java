@@ -9,4 +9,6 @@ import tn.microfinance.fincro.dao.model.Account;
 public interface AccountRepository extends CrudRepository<Account,Long> {
     @Query("select a.balance from Account a where a.idAccount =?1")
     double getBalanceById(long idaccount);
+
+    Account findAccountByUserId(long userId);
 }

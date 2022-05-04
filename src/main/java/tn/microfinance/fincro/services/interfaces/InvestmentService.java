@@ -14,4 +14,5 @@ public interface InvestmentService {
     public double savingInterestCalculation(int nbreOfPeriods, double montant, String scheme);
     public Investment makeSaving(long investorAccountId, int nbreOfPeriods, double amount, String typePeriod);
     public List<Investment> getAccountInvestsByType(InvestmentType investmentType, long accountId);
+    double calculateAccValue(int nbreOfPeriods, double amount, String typePeriod);
 }

@@ -29,8 +29,9 @@ public class Account implements Serializable {
     @Column(nullable = false)
     private Date accountCreationDate;
     @JsonIgnore
-    @ManyToOne
+    @OneToOne
     private User user;
+    private long userId;
     @JsonIgnore
     @OneToMany(mappedBy = "account")
     private List<Transaction> transactions;

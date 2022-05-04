@@ -58,4 +58,9 @@ public class AccountServiceImpl implements AccountService {
         accountRepository.save(account);
         System.out.println("Code : "+account.getAleaCode());
     }
+
+    @Override
+    public Account getAccountByUserId(long userId) {
+        return accountRepository.findAccountByUserId(userId);
+    }
 }
