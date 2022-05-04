@@ -51,8 +51,8 @@ public class User implements Serializable {
     private boolean isActive;
     private boolean isNotLocked;
 
-    @OneToMany(mappedBy = "user")
-    private List<Account>account;
+    @OneToOne(mappedBy = "user")
+    private Account account;
     @OneToMany(mappedBy = "fkClient")
     private List<InsurenceContract> insurenceContract;
 

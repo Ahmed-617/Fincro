@@ -12,7 +12,7 @@ public class SecurityConstant {
     public static final String ACCESS_DENIED_MESSAGE = "You do not have permission to access this page";
     public static final String OPTIONS_HTTP_METHOD = "OPTIONS";
     public static final String[] PUBLIC_URLS = { "/api/users/login/{username}/{password}", "/api/users/register", "/api/users/image/**",
-            "/api/users/resetPassword/**" };
+            "/api/users/resetPassword/**" ,"addAccount/{id}"};
     //public static final String[] PUBLIC_URLS = { "**" };
 }
 //

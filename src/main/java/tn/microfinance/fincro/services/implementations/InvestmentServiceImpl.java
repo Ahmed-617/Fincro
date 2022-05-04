@@ -208,6 +208,13 @@ public class InvestmentServiceImpl implements InvestmentService {
         return investmentRepository.getAccountInvestmentsByType(investmentType,accountId);
     }
 
+    @Override
+    public double calculateAccValue(int nbreOfPeriods, double amount, String typePeriod) {
+        double interest=savingInterestCalculation(nbreOfPeriods,amount,typePeriod);
+        interest=convertInterest(typePeriod, interest/100);
+        return amount*((Math.pow(1+(interest),nbreOfPeriods)-1)/(interest));
+    }
+
     public double convertInterest(String typePeriod, double interest) {
         switch(typePeriod){
             case "Monthly" : {

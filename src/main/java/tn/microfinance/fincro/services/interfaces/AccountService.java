@@ -13,4 +13,5 @@ public interface AccountService {
     Account retrieveAccount(Long id);
     double getBalance(long accountId);
     void setAleaCode(long accountId, String code);
+    Account getAccountByUserId(long userId);
 }
