@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import tn.microfinance.fincro.dao.model.CreditStatus;
 import tn.microfinance.fincro.dao.model.CreditType;
 import tn.microfinance.fincro.dao.model.MicroCredit;
+import tn.microfinance.fincro.dao.model.Account;
 
 import java.util.List;
 
@@ -18,4 +19,7 @@ public interface MicroCreditRepository extends CrudRepository<MicroCredit,Long> 
 
     @Query("SELECT c from  MicroCredit c where c.status = ?1")
     List<MicroCredit> retrieveCreditsByStatus(CreditStatus status);
+
+    @Query("SELECT c from MicroCredit c where c.accountFK.idAccount = (Select a.idAccount from Account a where a.user.userId=?1)")
+    List<MicroCredit> retrieveCredetsByUserId(Long idUser);
 }

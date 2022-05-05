@@ -29,6 +29,7 @@ public class MicroCreditRestController {
     }
 
     @GetMapping("getCredit/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public MicroCredit getCreditById(@PathVariable("id") Long id){
         return creditService.retrieveCredit(id);
     }
@@ -39,9 +40,10 @@ public class MicroCreditRestController {
         return creditService.addCredit(credit,idAccount);
     }
 
-    @PutMapping("updateCredit")
-    public MicroCredit updateCredit(@RequestBody MicroCredit credit){
-        return creditService.updateCredit(credit);
+    @PutMapping("updateCredit/{idAccount}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public MicroCredit updateCredit(@RequestBody MicroCredit credit,@PathVariable("idAccount") long idAccount){
+        return creditService.updateCredit(credit,idAccount);
     }
 
     @DeleteMapping("deleteCredit/{id}")
@@ -59,17 +61,32 @@ public class MicroCreditRestController {
         return creditService.getCreditsByStatus(status);
     }
 
+    @GetMapping("getAllCreditsByUserId/{id}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<MicroCredit> getCreditsByUserId(@PathVariable("id")Long id){
+        return creditService.getCreditsByUserId(id);
+    }
+
     @GetMapping("simulator/{amount}/{period}/{typePeriod}")
-    public Hashtable<String, Double> Simulation(@PathVariable double amount, @PathVariable int period,@PathVariable String typePeriod ){
+    @CrossOrigin(origins = "http://localhost:4200")
+    public List<Object> Simulation(@PathVariable double amount, @PathVariable int period,@PathVariable String typePeriod ){
         return creditService.Simulation(amount,period,typePeriod);
     }
 
-    @GetMapping("FailureToPay/{idCredit}/{period}/{interestAmount}")
+   /*
+   @GetMapping("simulator/{amount}/{period}/{typePeriod}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public Hashtable<String, Object> Simulation(@PathVariable double amount, @PathVariable int period,@PathVariable String typePeriod ){
+        return creditService.Simulation(amount,period,typePeriod);
+    }
+*/
+   @GetMapping("FailureToPay/{idCredit}/{period}/{interestAmount}")
     public Hashtable<String, Double> FailureToPay(@PathVariable long idCredit,@PathVariable int period,@PathVariable double interestAmount){
         return creditService.FailureToPay(idCredit,period,interestAmount);
     }
 
     @GetMapping("CapacityToPay/{idCredit}/{newAmount}")
+    @CrossOrigin(origins = "http://localhost:4200")
     public int CapacityToPay(@PathVariable long idCredit,@PathVariable double newAmount){
         return creditService.CapacityToPay(idCredit,newAmount);
     }
@@ -84,10 +101,16 @@ public class MicroCreditRestController {
         String headerValue = "attachment; filename=MicroCredit" + currentDateTime + ".xlsx";
         response.setHeader(headerKey, headerValue);
 
-        Hashtable<String, Double> sim = Simulation(amount,period,typePeriod);
+        List<Object> sim = Simulation(amount,period,typePeriod);
 
         CreditExcelExporter excelExporter = new CreditExcelExporter(sim,period);
 
         excelExporter.export(response);
+    }
+
+    @PutMapping("updateCreditStatus/{idAccount}/{status}")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public MicroCredit updateCreditStatus(@RequestBody MicroCredit credit,@PathVariable("idAccount") long idAccount,@PathVariable("status") CreditStatus status){
+        return creditService.updateCreditStatus(credit,idAccount,status);
     }
 }
