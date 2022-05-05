@@ -16,7 +16,7 @@ public interface MicroCreditService {
 
     void deleteCredit(Long id);
 
-    MicroCredit updateCredit(MicroCredit c);
+    MicroCredit updateCredit(MicroCredit c,Long idAccount);
 
     MicroCredit retrieveCredit(Long id);
 
@@ -24,8 +24,10 @@ public interface MicroCreditService {
 
     List<MicroCredit> getCreditsByStatus(CreditStatus status);
 
-    Hashtable<String, Double> Simulation(double amount, int period,String typePeriod);
+    List<MicroCredit> getCreditsByUserId(Long idUser);
 
+    List<Object> Simulation(double amount, int period,String typePeriod);
+    //Hashtable<String, Object> Simulation(double amount, int period,String typePeriod);
     double score(double amount,int period,String typePeriod);
 
     Hashtable<String,Double> FailureToPay(long idCredit,int period,double interestAmount);
@@ -35,4 +37,6 @@ public interface MicroCreditService {
     //Recomendation
 
     int CapacityToPay(long idCredit, double crd);
+
+    MicroCredit updateCreditStatus(MicroCredit c,Long idAccount,CreditStatus status);
 }

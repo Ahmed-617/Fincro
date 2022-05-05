@@ -21,8 +21,8 @@ public class CreditExcelExporter {
     private Hashtable<String, Double> simulation;
     int period;
 
-    public CreditExcelExporter(Hashtable<String, Double> simulation,int period) {
-        this.simulation = simulation;
+    public CreditExcelExporter(List<Object>  simulation,int period) {
+        this.simulation =(Hashtable<String, Double>) simulation;
         this.period = period;
         workbook = new XSSFWorkbook();
     }
@@ -75,10 +75,10 @@ public class CreditExcelExporter {
             int columnCount = 0;
             //System.out.println("crd "+i+" : " +simulation.get("crd"+i));
             createCell(row, columnCount++, i, style);
-            createCell(row, columnCount++, simulation.get("CRD "+i).toString(), style);
+            createCell(row, columnCount++, simulation.get("CRD"+i).toString(), style);
             createCell(row, columnCount++, simulation.get("Mensuality").toString(), style);
-            createCell(row, columnCount++, simulation.get("I "+i).toString(), style);
-            createCell(row, columnCount++, simulation.get("P "+i).toString(), style);
+            createCell(row, columnCount++, simulation.get("I"+i).toString(), style);
+            createCell(row, columnCount++, simulation.get("P"+i).toString(), style);
 
 
         }

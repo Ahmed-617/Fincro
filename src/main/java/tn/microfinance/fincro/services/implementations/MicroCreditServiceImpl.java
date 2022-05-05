@@ -13,6 +13,7 @@ import tn.microfinance.fincro.services.interfaces.MicroCreditService;
 import java.text.DecimalFormat;
 import java.math.RoundingMode;
 import java.text.DecimalFormatSymbols;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Locale;
@@ -56,9 +57,11 @@ public class MicroCreditServiceImpl implements MicroCreditService {
     }
 
     @Override
-    public MicroCredit updateCredit(MicroCredit c) {
-        Long t = c.getIdCredit();
-        if (creditRepo.findById(t).isPresent()) {
+    public MicroCredit updateCredit(MicroCredit c,Long idAccount) {
+        Account ac = accountRepo.findById(idAccount).get();
+        Long id = c.getIdCredit();
+        if (creditRepo.findById(id).isPresent()) {
+            c.setAccountFK(ac);
             return creditRepo.save(c);
         } else {
             System.out.println("credit doesn't exist !");
@@ -82,94 +85,102 @@ public class MicroCreditServiceImpl implements MicroCreditService {
         return creditRepo.retrieveCreditsByStatus(status);
     }
 
-    @Override
+   /* @Override
     public Hashtable<String, Double> Simulation(double amount, int period, String typePeriod) {
-        Hashtable<String, Double> sim = new Hashtable<String, Double>();
+            Hashtable<String, Double> sim = new Hashtable<String, Double>();
         double mensuality;
         double crd;
         crd = amount;
         double interest= 6.25 + calculateInterest(score(amount,period,typePeriod));//score personel manquant
+        sim.put("InterestRate",interest);
         interest=interest/100;
         System.out.println("interest "+ interest );
         switch (typePeriod){
             case "Monthly":{
                 interest = Math.pow(1+interest,(1d/12))-1;
+               // sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
                 System.out.println("interest "+ interest );
                 mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
 
                 sim.put("Mensuality",Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+Double.parseDouble(df.format(mensuality)));
                 System.out.println("amount : "+amount);
-                sim.put("CRD 1", crd);
-                sim.put("I 1", crd * interest);
-                sim.put("P 1",mensuality-(crd*interest));
+                sim.put("CRD1", crd);
+                sim.put("I1", crd * interest);
+                sim.put("P1",mensuality-(crd*interest));
+
                 //  System.out.println("CRD 1 :"+Double.parseDouble(df.format(crd)));
                 // System.out.println("CRD 1 :"+df.format(crd));
 
                 for (int i=2;i<=period;i++){
                     double interet = crd * interest;
-                    sim.put("I "+i,interet);
+                    sim.put("I"+i,interet);
                     double principal = mensuality - interet;
-                    sim.put("P "+i,principal);
+                    sim.put("P"+i,principal);
                     crd = crd - principal;
-                    sim.put("CRD "+i, Double.parseDouble(df.format(crd)));
+                    sim.put("CRD"+i, Double.parseDouble(df.format(crd)));
                     System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
                 }
             }break;
-            case "Half-Yearly":{ interest = Math.pow(1+interest,1d/2)-1;
+            case "Half-Yearly":{
+                interest = Math.pow(1+interest,1d/2)-1;
+               // sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
                 System.out.println("interest "+ interest );
                 mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
 
                 sim.put("Mensuality", Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+mensuality);
                 System.out.println("amount : "+amount);
-                sim.put("CRD 1", crd);
+                sim.put("CRD1", crd);
                 System.out.println("CRD 1 :"+Double.parseDouble(df.format(crd)));
-                sim.put("I 1", crd * interest);
-                sim.put("P 1",mensuality-(crd*interest));
+                sim.put("I1", crd * interest);
+                sim.put("P1",mensuality-(crd*interest));
 
                 for (int i=2;i<=period;i++){
                     double interet = crd * interest;
-                    sim.put("I "+i,interet);
+                    sim.put("I"+i,interet);
                     double principal = mensuality - interet;
-                    sim.put("P "+i,principal);
+                    sim.put("P"+i,principal);
                     crd = crd - principal;
-                    sim.put("CRD "+i, crd);
+                    sim.put("CRD"+i, crd);
                     System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
                 }
             }break;
-            case "Quarterly" : { interest = Math.pow(1+interest,1d/4)-1;
+            case "Quarterly" : {
+                interest = Math.pow(1+interest,1d/4)-1;
+               // sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
                 System.out.println("interest "+ interest );
                 mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
 
                 sim.put("Mensuality", Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+mensuality);
                 System.out.println("amount : "+amount);
-                sim.put("CRD 1", crd);
+                sim.put("CRD1", crd);
                 System.out.println("CRD 1 :"+Double.parseDouble(df.format(crd)));
-                sim.put("I 1", crd * interest);
-                sim.put("P 1",mensuality-(crd*interest));
+                sim.put("I1", crd * interest);
+                sim.put("P1",mensuality-(crd*interest));
 
                 for (int i=2;i<=period;i++){
                     crd = crd - (mensuality-(crd*interest));
-                    sim.put("CRD "+i, crd);
+                    sim.put("CRD"+i, crd);
                     System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
                 }
             }break;
             case "Yearly" : {
+                //sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
                 mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
 
                 sim.put("Mensuality", Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+mensuality);
                 System.out.println("amount : "+amount);
-                sim.put("CRD 1", crd);
+                sim.put("CRD1", crd);
                 System.out.println("CRD 1 :"+Double.parseDouble(df.format(crd)));
-                sim.put("I 1", crd * interest);
-                sim.put("P 1",mensuality-(crd*interest));
+                sim.put("I1", crd * interest);
+                sim.put("P1",mensuality-(crd*interest));
 
                 for (int i=2;i<=period;i++){
                     crd = crd - (mensuality-(crd*interest));
-                    sim.put("CRD "+i, crd);
+                    sim.put("CRD"+i, crd);
                     System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
                 }
             }break;
@@ -178,7 +189,136 @@ public class MicroCreditServiceImpl implements MicroCreditService {
 
 
         return sim;
-    }
+    }*/
+   @Override
+   public List<Object> Simulation(double amount, int period, String typePeriod) {
+       List<Object> sim = new ArrayList<Object>();
+       double mensuality;
+       double crd;
+       crd = amount;
+       double interest= 6.25 + calculateInterest(score(amount,period,typePeriod));//score personel manquant
+       sim.add(interest);
+       interest=interest/100;
+       System.out.println("interest "+ interest );
+       switch (typePeriod){
+           case "Monthly":{
+               interest = Math.pow(1+interest,(1d/12))-1;
+               // sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
+               System.out.println("interest "+ interest );
+               mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
+
+              // sim.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+               System.out.println("Mensuality : "+Double.parseDouble(df.format(mensuality)));
+               System.out.println("amount : "+amount);
+              /* sim.put("CRD1", crd);
+               sim.put("I1", crd * interest);
+               sim.put("P1",mensuality-(crd*interest));*/
+               Hashtable<String,Object> p = new Hashtable<String,Object>();
+               p.put("CRD",crd);
+               p.put("I", crd * interest);
+               p.put("P",mensuality-(crd*interest));
+               p.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+               sim.add(p);
+               //  System.out.println("CRD 1 :"+Double.parseDouble(df.format(crd)));
+               // System.out.println("CRD 1 :"+df.format(crd));
+
+               for (int i=2;i<=period;i++){
+                   Hashtable<String,Object> p1 = new Hashtable<String,Object>();
+                   double interet = crd * interest;
+                   p1.put("I",interet);
+                   double principal = mensuality - interet;
+                   p1.put("P",principal);
+                   crd = crd - principal;
+                   p1.put("CRD", Double.parseDouble(df.format(crd)));
+                   System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
+                   p1.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+                   sim.add(p1);
+                   //System.out.println(sim.get(1));
+               }
+           }break;
+           case "Half-Yearly":{
+               interest = Math.pow(1+interest,1d/2)-1;
+               // sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
+               System.out.println("interest "+ interest );
+               mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
+
+               Hashtable<String,Object> p = new Hashtable<String,Object>();
+               p.put("CRD",crd);
+               p.put("I", crd * interest);
+               p.put("P",mensuality-(crd*interest));
+               p.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+               sim.add(p);
+
+               for (int i=2;i<=period;i++){
+                   Hashtable<String,Object> p1 = new Hashtable<String,Object>();
+                   double interet = crd * interest;
+                   p1.put("I",interet);
+                   double principal = mensuality - interet;
+                   p1.put("P",principal);
+                   crd = crd - principal;
+                   p1.put("CRD", Double.parseDouble(df.format(crd)));
+                   System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
+                   p1.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+                   sim.add(p1);
+               }
+           }break;
+           case "Quarterly" : {
+               interest = Math.pow(1+interest,1d/4)-1;
+               // sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
+               System.out.println("interest "+ interest );
+               mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
+
+               Hashtable<String,Object> p = new Hashtable<String,Object>();
+               p.put("CRD",crd);
+               p.put("I", crd * interest);
+               p.put("P",mensuality-(crd*interest));
+               p.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+               sim.add(p);
+
+               for (int i=2;i<=period;i++){
+                   Hashtable<String,Object> p1 = new Hashtable<String,Object>();
+                   double interet = crd * interest;
+                   p1.put("I",interet);
+                   double principal = mensuality - interet;
+                   p1.put("P",principal);
+                   crd = crd - principal;
+                   p1.put("CRD", Double.parseDouble(df.format(crd)));
+                   System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
+                   p1.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+                   sim.add(p1);
+               }
+           }break;
+           case "Yearly" : {
+               //sim.put("InterestRate",Double.parseDouble(df.format(interest*100)));
+               mensuality = (amount*interest)/(1-Math.pow(1+interest,-period));
+
+               Hashtable<String,Object> p = new Hashtable<String,Object>();
+               p.put("CRD",crd);
+               p.put("I", crd * interest);
+               p.put("P",mensuality-(crd*interest));
+               p.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+               sim.add(p);
+
+               for (int i=2;i<=period;i++){
+                   Hashtable<String,Object> p1 = new Hashtable<String,Object>();
+                   double interet = crd * interest;
+                   p1.put("I",interet);
+                   double principal = mensuality - interet;
+                   p1.put("P",principal);
+                   crd = crd - principal;
+                   p1.put("CRD", Double.parseDouble(df.format(crd)));
+                   System.out.println("CRD "+i+" : "+Double.parseDouble(df.format(crd)));
+                   p1.put("Mensuality",Double.parseDouble(df.format(mensuality)));
+                   sim.add(p1);
+
+               }
+           }break;
+           default: {System.out.println("Invalid Type");}
+       }
+
+
+       return sim;
+   }
 
     @Override
     public double score(double amount, int period, String typePeriod) {
@@ -268,7 +408,7 @@ public class MicroCreditServiceImpl implements MicroCreditService {
         Hashtable<String, Double> newCredit = new Hashtable<String, Double>();
         MicroCredit credit = retrieveCredit(idCredit);
         double mensuality;
-        double crd = Simulation(credit.getAmountCredit(),credit.getPeriod(),credit.getTypePeriod()).get("CRD "+period);
+        double crd =((Hashtable<String,Double>)  Simulation(credit.getAmountCredit(),credit.getPeriod(),credit.getTypePeriod()).get(period)).get("CRD");
         int newPeriod =(int) (credit.getAmountRemaining()/credit.getPayedAmount()) + 3;
         System.out.println("period : "+ newPeriod);
         // int newPeriod = credit.getPeriod()+3;//ajout period selon type(calcul de periode restante)
@@ -286,18 +426,18 @@ public class MicroCreditServiceImpl implements MicroCreditService {
                 newCredit.put("Mensuality",Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+mensuality);
                 crd = newAmount;
-                newCredit.put("CRD 1", Double.parseDouble(df.format(crd)));
+                newCredit.put("CRD1", Double.parseDouble(df.format(crd)));
                 System.out.println("CRD 1 :"+Double.parseDouble(df.format(crd)));
-                newCredit.put("I 1", crd * interestRate);
-                newCredit.put("P 1",mensuality-(crd*interestRate));
+                newCredit.put("I1", crd * interestRate);
+                newCredit.put("P1",mensuality-(crd*interestRate));
 
                 for (int i=2;i<=newPeriod;i++){
                     double interet = crd * interestRate;
-                    newCredit.put("I "+i,interet);
+                    newCredit.put("I"+i,interet);
                     double principal = mensuality - interet;
-                    newCredit.put("P "+i,principal);
+                    newCredit.put("P"+i,principal);
                     crd = crd - principal;
-                    newCredit.put("CRD "+i, Double.parseDouble(df.format(crd)));
+                    newCredit.put("CRD"+i, Double.parseDouble(df.format(crd)));
                     System.out.println("CRD "+i+" : "+crd);
                 }
             }break;
@@ -308,18 +448,18 @@ public class MicroCreditServiceImpl implements MicroCreditService {
                 newCredit.put("Mensuality", Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+mensuality);
 
-                newCredit.put("CRD 1", Double.parseDouble(df.format(crd)));
+                newCredit.put("CRD1", Double.parseDouble(df.format(crd)));
                 System.out.println("CRD 1 :"+crd);
-                newCredit.put("I 1", crd * interestRate);
-                newCredit.put("P 1",mensuality-(crd*interestRate));
+                newCredit.put("I1", crd * interestRate);
+                newCredit.put("P1",mensuality-(crd*interestRate));
 
                 for (int i=2;i<=newPeriod;i++){
                     double interet = crd * interestRate;
-                    newCredit.put("I "+i,interet);
+                    newCredit.put("I"+i,interet);
                     double principal = mensuality - interet;
-                    newCredit.put("P "+i,principal);
+                    newCredit.put("P"+i,principal);
                     crd = crd - principal;
-                    newCredit.put("CRD "+i, Double.parseDouble(df.format(crd)));
+                    newCredit.put("CRD"+i, Double.parseDouble(df.format(crd)));
                     System.out.println("CRD "+i+" : "+crd);
                 }}break;
             case "Quarterly" : {
@@ -329,18 +469,18 @@ public class MicroCreditServiceImpl implements MicroCreditService {
                 newCredit.put("Mensuality", Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+mensuality);
 
-                newCredit.put("CRD 1", Double.parseDouble(df.format(crd)));
+                newCredit.put("CRD1", Double.parseDouble(df.format(crd)));
                 System.out.println("CRD 1 :"+crd);
-                newCredit.put("I 1", crd * interestRate);
-                newCredit.put("P 1",mensuality-(crd*interestRate));
+                newCredit.put("I1", crd * interestRate);
+                newCredit.put("P1",mensuality-(crd*interestRate));
 
                 for (int i=2;i<=newPeriod;i++){
                     double interet = crd * interestRate;
-                    newCredit.put("I "+i,interet);
+                    newCredit.put("I"+i,interet);
                     double principal = mensuality - interet;
-                    newCredit.put("P "+i,principal);
+                    newCredit.put("P"+i,principal);
                     crd = crd - principal;
-                    newCredit.put("CRD "+i, Double.parseDouble(df.format(crd)));
+                    newCredit.put("CRD"+i, Double.parseDouble(df.format(crd)));
                     System.out.println("CRD "+i+" : "+crd);
                 }}break;
             case "Yearly" : {
@@ -348,18 +488,18 @@ public class MicroCreditServiceImpl implements MicroCreditService {
                 newCredit.put("Mensuality", Double.parseDouble(df.format(mensuality)));
                 System.out.println("Mensuality : "+mensuality);
 
-                newCredit.put("CRD 1", Double.parseDouble(df.format(crd)));
+                newCredit.put("CRD1", Double.parseDouble(df.format(crd)));
                 System.out.println("CRD 1 :"+crd);
-                newCredit.put("I 1", crd * interestRate);
-                newCredit.put("P 1",mensuality-(crd*interestRate));
+                newCredit.put("I1", crd * interestRate);
+                newCredit.put("P1",mensuality-(crd*interestRate));
 
                 for (int i=2;i<=newPeriod;i++){
                     double interet = crd * interestRate;
-                    newCredit.put("I "+i,interet);
+                    newCredit.put("I"+i,interet);
                     double principal = mensuality - interet;
-                    newCredit.put("P "+i,principal);
+                    newCredit.put("P"+i,principal);
                     crd = crd - principal;
-                    newCredit.put("CRD "+i, Double.parseDouble(df.format(crd)));
+                    newCredit.put("CRD"+i, Double.parseDouble(df.format(crd)));
                     System.out.println("CRD "+i+" : "+crd);
                 }}break;
             default: {System.out.println("Invalid Type");}
@@ -372,16 +512,16 @@ public class MicroCreditServiceImpl implements MicroCreditService {
     public int CapacityToPay(long idCredit, double newAmount) {
         int period =0;
         MicroCredit credit = retrieveCredit(idCredit);
-        double amount = Simulation(credit.getAmountCredit(),credit.getPeriod(),credit.getTypePeriod()).get("Mensuality");
+        double amount =((Hashtable<String,Double>) Simulation(credit.getAmountCredit(),credit.getPeriod(),credit.getTypePeriod()).get(1)).get("Mensuality");
         System.out.println("Mensuality : " + amount);
         int p =(int) ((credit.getAmountCredit()-credit.getAmountRemaining())/credit.getPayedAmount());
         System.out.println("p : "+p);
         if(newAmount>=amount){
             // period = (int)((Math.log(newAmount/(newAmount-credit.getAmountRemaining()*credit.getInterestRate()))/Math.log(10))/(Math.log(1+credit.getInterestRate())/Math.log(10)));
             double i = Math.pow(1+(credit.getInterestRate()/100),(1d/12))-1;
-            double crd = Simulation(credit.getAmountCredit(),credit.getPeriod(),credit.getTypePeriod()).get("CRD "+p);
+            double crd =((Hashtable<String,Double>) Simulation(credit.getAmountCredit(),credit.getPeriod(),credit.getTypePeriod()).get(p+1)).get("CRD");
             System.out.println("crd : "+ crd);
-            double a = Math.log((newAmount-(Simulation(credit.getAmountCredit(),credit.getPeriod(),credit.getTypePeriod()).get("CRD "+p)*i))/newAmount)/Math.log(10);
+            double a = Math.log((newAmount-(crd*i))/newAmount)/Math.log(10);
             System.out.println("a : " + a);
             double b = Math.log(1/(1+i))/Math.log(10);
             System.out.println("b : " + b);
@@ -389,5 +529,24 @@ public class MicroCreditServiceImpl implements MicroCreditService {
             System.out.println("Period : " + period);
         }
         return period;
+    }
+
+    @Override
+    public List<MicroCredit> getCreditsByUserId(Long idUser) {
+        return creditRepo.retrieveCredetsByUserId(idUser);
+    }
+
+    @Override
+    public MicroCredit updateCreditStatus(MicroCredit c,Long idAccount,CreditStatus status) {
+        Account ac = accountRepo.findById(idAccount).get();
+        Long id = c.getIdCredit();
+        if (creditRepo.findById(id).isPresent()) {
+            c.setAccountFK(ac);
+            c.setStatus(status);
+            return creditRepo.save(c);
+        } else {
+            System.out.println("credit doesn't exist !");
+            return null;
+        }
     }
 }
